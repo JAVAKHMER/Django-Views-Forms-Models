@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+        <title>Insert Employee</title>
+    </head>
+    <body>
+        
+        <div >
+            <form action="" method="POST">
+                {% csrf_token %}
+                {% for field in employees_form %}
+                    <div class="fieldWrapper">
+                        {{ field.errors }}
+                        {{ field.label_tag }} {{ field }}
+                        <!-- {% if 'Comapany' == field.label %}
+                            {{ field.label_tag }} {{ field }}
+                        {% else %}
+                            {{ field.label_tag }} {{ field }}
+                        {% endif %} -->
+                        {% if field.help_text %}
+                        <p class="help">{{ field.help_text|safe }}</p>
+                        {% endif %}
+                    </div><br>
+                {% endfor %}
+                <input type="submit" value="Submit">
+            </form>
+        </div> <!-- /add-new-class-form -->
+        
+        <div >
+            {% if not employees %}
+            <h5>Empty list</h5>
+            {% else %}
+            <table>
+                <tr>
+                    <th>Employee Id</th>
+                    <th>Employee Name</th>
+                    <th>Employee Phone</th>
+                    <th>Company Name</th>
+                </tr>
+                {% for com in employees %}
+                <tr>
+                    <td>{{ com.id }}</td>
+                    <td>{{ com.firstName }} {{ com.lastName }}</td>
+                    <td>{{ com.phone }}</td>
+                    <td>{{ com.comapany.company_name }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% endif %}
+        </div> 
+        
+    </body>
+</html>

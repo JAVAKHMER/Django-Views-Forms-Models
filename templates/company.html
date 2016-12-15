@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+        <title>Insert Company</title>
+    </head>
+    <body>
+        
+        <div >
+            <form action="" method="POST">
+                {% csrf_token %}
+                {% for field in company_form %}
+                    <div class="fieldWrapper">
+                        {{ field.errors }}
+                        {{ field.label_tag }} {{ field }}
+                        {% if field.help_text %}
+                        <p class="help">{{ field.help_text|safe }}</p>
+                        {% endif %}
+                    </div><br>
+                {% endfor %}
+                <input type="submit" value="Submit">
+            </form>
+        </div> <!-- /add-new-class-form -->
+        
+        <div>
+            {% if not company %}
+            <h5>Empty list</h5>
+            {% else %}
+            <table>
+                <tr>
+                    <th>Id</th>
+                    <th>Company Name</th>
+                    <th>Company Phone</th>
+                </tr>
+                {% for com in company %}
+                <tr>
+                    <td>{{ com.id }}</td>
+                    <td>{{ com.company_name }}</td>
+                    <td>{{ com.companyPhone }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% endif %}
+        </div> <!-- /class-list -->
+        
+    </body>
+</html>

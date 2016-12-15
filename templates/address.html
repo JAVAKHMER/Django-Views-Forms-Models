@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Address</title>
+</head>
+<body>
+    <form action="" method="post">
+                {% csrf_token %}
+                {% for field in address_form %}
+                    <div class="fieldWrapper">
+                        {{ field.errors }}
+                        {{ field.label_tag }} {{ field }}
+                        {% if field.help_text %}
+                        <p class="help">{{ field.help_text|safe }}</p>
+                        {% endif %}
+                    </div><br>
+                {% endfor %}
+                <input type="submit" value="Submit">
+            </form>
+        </div> <!-- /add-new-class-form -->
+        
+        <div >
+            {% if not address %}
+            <h5>Empty list</h5>
+            {% else %}
+            <table>
+                <tr>
+                    <th>Employee Id</th>
+                    <th>Employee Street</th>
+                    <th>Employee City</th>
+                </tr>
+                {% for addr in address %}
+                <tr>
+                    <td>{{ addr.id }}</td>
+                    <td>{{ addr.street }} </td>
+                    <td>{{ addr.city }} </td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% endif %}
+        </div> 
+</body>
+</html>
